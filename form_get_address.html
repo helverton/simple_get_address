@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Request Example</title>
+    <script>
+        function getAddress() {
+            const zipcode = document.getElementById("zipcode").value;
+            const url = `https://viacep.com.br/ws/${zipcode}/json/`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("state").value = data.uf;
+                    document.getElementById("city").value = data.localidade;
+                    document.getElementById("block").value = data.bairro;
+                    document.getElementById("street").value = data.logradouro;
+                })
+                .catch(error => console.error(error));
+        }
+    </script>
+</head>
+<body>
+    <h1>API Request Example</h1>
+    <p>Enter your zipcode:</p>
+    <input type="text" id="zipcode">
+    <button onclick="getAddress()">Get Address</button>
+
+    <input type="text" id="state">
+    <input type="text" id="city">
+    <input type="text" id="block">
+    <input type="text" id="street">
+</body>
+</html>
